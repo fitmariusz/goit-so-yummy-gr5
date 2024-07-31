@@ -37,6 +37,10 @@ app.use(express.json());
 // app.use("/api", apiRouter);
 // app.use("/api/users", usersRouter);
 // app.use("/avatars", routeAvatar);
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
 app.use(
   "/api-docs",
   swaggerUi.serve,
