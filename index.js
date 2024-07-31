@@ -4,10 +4,15 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDokument = require("./api-docs/api.json");
 
 // const apiRouter = require("./routes/api/contactsRouter");
 // const routeAvatar = require("./routes/avatars/routeAvatar");
 // const usersRouter = require("./routes/api/usersRouter");
+var options = {
+  explorer: true,
+};
 
 dotenv.config();
 
@@ -18,17 +23,29 @@ const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "ejs");
+// app.set("views", path.join(__dirname, "views"));
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "public")));
+
+
+
+// app.use(express.static(path.join(__dirname, "public")));
 
 // app.use("/api", apiRouter);
 // app.use("/api/users", usersRouter);
 // app.use("/avatars", routeAvatar);
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDokument, options)
+);
 
 app.use((req, res) => {
   res.status(404).json({ message: `Not found - ${req.path}` });
