@@ -38,7 +38,7 @@ app.use(express.json());
 // app.use("/api/users", usersRouter);
 // app.use("/avatars", routeAvatar);
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Back-end So-yummy GOIT GR5");
 });
 
 app.use(
@@ -60,16 +60,16 @@ app.use(
 // });
 
 // const startServer = async () => {
-  // try {
-  //   // await connection;
-  //   // console.log("Database connected");
-  //   app.listen(8000, () => {
-  //     console.log("Server started on http://localhost:8000");
-  //   });
-  // } catch (err) {
-  //   process.exit(1);
-  // }
-// };
+  try {
+    // await connection;
+    // console.log("Database connected");
+    app.listen(process.env.PORT, () => {
+      console.log("Server started on http://localhost:8000");
+    });
+  } catch (err) {
+    process.exit(1);
+  }
+
 
 // startServer();
 // const app = require("express")();
@@ -79,6 +79,6 @@ app.use(
 //   res.send("Hello World");
 // });
 
-app.listen(process.env.PORT, () => {
-  console.log("Server is running on port 3000");
-});
+// app.listen(process.env.PORT, () => {
+//   console.log("Server is running on port 3000");
+// });
