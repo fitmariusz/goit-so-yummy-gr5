@@ -4,15 +4,15 @@ const cors = require("cors");
 // const mongoose = require("mongoose");
 // const path = require("path");
 const dotenv = require("dotenv");
-// const swaggerUi = require("swagger-ui-express");
-// const swaggerDokument = require("./api-docs/api.json");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDokument = require("./api-docs/api.json");
 
 // const apiRouter = require("./routes/api/contactsRouter");
 // const routeAvatar = require("./routes/avatars/routeAvatar");
 // const usersRouter = require("./routes/api/usersRouter");
-// const options = {
-//   explorer: true,
-// };
+const options = {
+  explorer: true,
+};
 
 dotenv.config();
 
@@ -41,11 +41,11 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-// app.use(
-//   "/api-docs",
-//   swaggerUi.serve,
-//   swaggerUi.setup(swaggerDokument, options)
-// );
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDokument, options)
+);
 
 // app.use((req, res) => {
 //   res.status(404).json({ message: `Not found - ${req.path}` });
