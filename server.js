@@ -1,8 +1,8 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-// const mongoose = require("mongoose");
-// const path = require("path");
+const mongoose = require("mongoose");
+const path = require("path");
 const dotenv = require("dotenv");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDokument = require("./api-docs/api.json");
@@ -16,8 +16,8 @@ const options = {
 
 dotenv.config();
 
-// const { DB_HOST: urlDb } = process.env;
-// const connection = mongoose.connect(urlDb);
+const { DB_HOST: urlDb } = process.env;
+const connection = mongoose.connect(urlDb);
 
 const app = express();
 
@@ -38,7 +38,7 @@ app.use(express.json());
 // app.use("/api/users", usersRouter);
 // app.use("/avatars", routeAvatar);
 app.get("/", (req, res) => {
-  res.send("Back-end So-yummy GOIT GR5");
+  res.send("Back-end So-yummy GOIT GR5 - conect to mondoose db");
 });
 
 app.use(
@@ -58,11 +58,13 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message || "Something went wrong" });
   }
 });
-
+const conectToBase = async () => {
+  await connection;
+}
 // const startServer = async () => {
   try {
-    // await connection;
-    // console.log("Database connected");
+    conectToBase();
+    console.log("Database connected");
     app.listen(process.env.PORT, () => {
       console.log("Server started on http://localhost:8000");
     });
