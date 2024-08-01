@@ -47,17 +47,17 @@ app.use(
   swaggerUi.setup(swaggerDokument, options)
 );
 
-// app.use((req, res) => {
-//   res.status(404).json({ message: `Not found - ${req.path}` });
-// });
+app.use((req, res) => {
+  res.status(404).json({ message: `Not found - ${req.path}` });
+});
 
-// app.use((err, req, res, next) => {
-//   if (err.name === "ValidationError") {
-//     return res.status(400).json({ message: err.message });
-//   } else {
-//     res.status(500).json({ message: err.message || "Something went wrong" });
-//   }
-// });
+app.use((err, req, res, next) => {
+  if (err.name === "ValidationError") {
+    return res.status(400).json({ message: err.message });
+  } else {
+    res.status(500).json({ message: err.message || "Something went wrong" });
+  }
+});
 
 // const startServer = async () => {
   try {
