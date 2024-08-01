@@ -14,10 +14,19 @@ const options = {
   explorer: true,
 };
 
+const conectToBase = async () => {
+  await connection;
+  console.log(connection);
+};
+
 dotenv.config();
 
 const { DB_HOST: urlDb } = process.env;
+// console.log(process.env.DB_HOST);
 const connection = mongoose.connect(urlDb);
+conectToBase();
+
+
 
 const app = express();
 
@@ -58,9 +67,7 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message || "Something went wrong" });
   }
 });
-// const conectToBase = async () => {
-//   await connection;
-// }
+
 // const startServer = async () => {
   try {
     // conectToBase();
