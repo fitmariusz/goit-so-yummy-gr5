@@ -11,7 +11,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8000/api"
+      "url": "https://goit-so-yummy-gr5-f200f807d84e.herokuapp.com/api-docs"
+    },
+    {
+      "url": "http://localhost:8000/api-docs"
     }
   ],
   "tags": [
