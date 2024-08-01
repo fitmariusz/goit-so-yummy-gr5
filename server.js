@@ -58,9 +58,9 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message || "Something went wrong" });
   }
 });
-// const conectToBase = async () => {
-//   await connection;
-// }
+const conectToBase = async () => {
+  await connection;
+}
 const startServer = async () => {
   try {
     // await connection;
@@ -72,7 +72,7 @@ const startServer = async () => {
     process.exit(1);
   }
 };
-
+conectToBase();
 startServer();
 // const app = require("express")();
 // require("dotenv").config();
