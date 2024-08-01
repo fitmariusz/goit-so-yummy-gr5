@@ -38,7 +38,7 @@ app.use(express.json());
 // app.use("/api/users", usersRouter);
 // app.use("/avatars", routeAvatar);
 app.get("/", (req, res) => {
-  res.send("Back-end So-yummy GOIT GR5 - conect to mondoose db");
+  res.send(connection);
 });
 
 app.use(
@@ -63,7 +63,7 @@ app.use((err, req, res, next) => {
 // }
 const startServer = async () => {
   try {
-    await connection;
+    // await connection;
     console.log("Database connected");
     app.listen(process.env.PORT, () => {
       console.log("Server started on http://localhost:8000");
