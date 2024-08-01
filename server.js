@@ -1,23 +1,23 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-const mongoose = require("mongoose");
-const path = require("path");
+// const mongoose = require("mongoose");
+// const path = require("path");
 const dotenv = require("dotenv");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDokument = require("./api-docs/api.json");
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerDokument = require("./api-docs/api.json");
 
 // const apiRouter = require("./routes/api/contactsRouter");
 // const routeAvatar = require("./routes/avatars/routeAvatar");
 // const usersRouter = require("./routes/api/usersRouter");
-const options = {
-  explorer: true,
-};
+// const options = {
+//   explorer: true,
+// };
 
 dotenv.config();
 
-const { DB_HOST: urlDb } = process.env;
-const connection = mongoose.connect(urlDb);
+// const { DB_HOST: urlDb } = process.env;
+// const connection = mongoose.connect(urlDb);
 
 const app = express();
 
@@ -41,23 +41,23 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDokument, options)
-);
+// app.use(
+//   "/api-docs",
+//   swaggerUi.serve,
+//   swaggerUi.setup(swaggerDokument, options)
+// );
 
-app.use((req, res) => {
-  res.status(404).json({ message: `Not found - ${req.path}` });
-});
+// app.use((req, res) => {
+//   res.status(404).json({ message: `Not found - ${req.path}` });
+// });
 
-app.use((err, req, res, next) => {
-  if (err.name === "ValidationError") {
-    return res.status(400).json({ message: err.message });
-  } else {
-    res.status(500).json({ message: err.message || "Something went wrong" });
-  }
-});
+// app.use((err, req, res, next) => {
+//   if (err.name === "ValidationError") {
+//     return res.status(400).json({ message: err.message });
+//   } else {
+//     res.status(500).json({ message: err.message || "Something went wrong" });
+//   }
+// });
 
 // const startServer = async () => {
   // try {
