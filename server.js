@@ -58,12 +58,12 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message || "Something went wrong" });
   }
 });
-const conectToBase = async () => {
-  await connection;
-}
+// const conectToBase = async () => {
+//   await connection;
+// }
 // const startServer = async () => {
   try {
-    conectToBase();
+    // conectToBase();
     console.log("Database connected");
     app.listen(process.env.PORT, () => {
       console.log("Server started on http://localhost:8000");
