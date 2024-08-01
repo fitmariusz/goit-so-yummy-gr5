@@ -38,7 +38,7 @@ app.use(express.json());
 // app.use("/api/users", usersRouter);
 // app.use("/avatars", routeAvatar);
 app.get("/", (req, res) => {
-  res.send(connection);
+  res.send(urlDb);
 });
 
 app.use(
