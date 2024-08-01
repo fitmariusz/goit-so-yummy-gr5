@@ -24,7 +24,7 @@ dotenv.config();
 const { DB_HOST: urlDb } = process.env;
 // console.log(process.env.DB_HOST);
 const connection = mongoose.connect(urlDb);
-conectToBase();
+// conectToBase();
 
 
 
