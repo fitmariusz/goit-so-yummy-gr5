@@ -61,9 +61,9 @@ app.use((err, req, res, next) => {
 // const conectToBase = async () => {
 //   await connection;
 // }
-const startServer = async () => {
+// const startServer = async () => {
   try {
-    await connection;
+    // await connection;
     console.log("Database connected");
     app.listen(process.env.PORT, () => {
       console.log("Server started on http://localhost:8000");
@@ -71,9 +71,9 @@ const startServer = async () => {
   } catch (err) {
     process.exit(1);
   }
-};
+// };
 
-startServer();
+// startServer();
 // const app = require("express")();
 // require("dotenv").config();
 
