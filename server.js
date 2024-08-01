@@ -14,19 +14,10 @@ const options = {
   explorer: true,
 };
 
-const conectToBase = async () => {
-  await connection;
-  console.log(connection);
-};
-
 dotenv.config();
 
 const { DB_HOST: urlDb } = process.env;
-// console.log(process.env.DB_HOST);
 const connection = mongoose.connect(urlDb);
-// conectToBase();
-
-
 
 const app = express();
 
@@ -67,10 +58,12 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message || "Something went wrong" });
   }
 });
-
-// const startServer = async () => {
+// const conectToBase = async () => {
+//   await connection;
+// }
+const startServer = async () => {
   try {
-    // conectToBase();
+    await connection;
     console.log("Database connected");
     app.listen(process.env.PORT, () => {
       console.log("Server started on http://localhost:8000");
@@ -78,9 +71,9 @@ app.use((err, req, res, next) => {
   } catch (err) {
     process.exit(1);
   }
+};
 
-
-// startServer();
+startServer();
 // const app = require("express")();
 // require("dotenv").config();
 
