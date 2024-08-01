@@ -63,7 +63,7 @@ app.use((err, req, res, next) => {
 // }
 const startServer = async () => {
   try {
-    await connection;
+    // await connection;
     console.log("Database connected");
     app.listen(process.env.PORT, () => {
       console.log("Server started on http://localhost:8000");
