@@ -59,19 +59,19 @@ app.use((err, req, res, next) => {
   }
 });
 
-const startServer = async () => {
-  try {
-    // await connection;
-    // console.log("Database connected");
-    app.listen(8000, () => {
-      console.log("Server started on http://localhost:8000");
-    });
-  } catch (err) {
-    process.exit(1);
-  }
-};
+// const startServer = async () => {
+  // try {
+  //   // await connection;
+  //   // console.log("Database connected");
+  //   app.listen(8000, () => {
+  //     console.log("Server started on http://localhost:8000");
+  //   });
+  // } catch (err) {
+  //   process.exit(1);
+  // }
+// };
 
-startServer();
+// startServer();
 // const app = require("express")();
 // require("dotenv").config();
 
@@ -79,6 +79,6 @@ startServer();
 //   res.send("Hello World");
 // });
 
-// app.listen(process.env.PORT, () => {
-//   console.log("Server is running on port 3001");
-// });
+app.listen(process.env.PORT, () => {
+  console.log("Server is running on port 3000");
+});
