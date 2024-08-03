@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const path = require("path");
+// const path = require("path");
 const dotenv = require("dotenv");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDokument = require("./api-docs/api.json");
@@ -10,6 +10,7 @@ const swaggerDokument = require("./api-docs/api.json");
 // const apiRouter = require("./routes/api/contactsRouter");
 // const routeAvatar = require("./routes/avatars/routeAvatar");
 // const usersRouter = require("./routes/api/usersRouter");
+const authRouter = require("./router/auth/authRouter")
 const options = {
   explorer: true,
 };
@@ -37,8 +38,9 @@ app.use(express.json());
 // app.use("/api", apiRouter);
 // app.use("/api/users", usersRouter);
 // app.use("/avatars", routeAvatar);
+//
 app.get("/", (req, res) => {
-  res.send(urlDb);
+  res.send(connection);
 });
 
 app.use(
@@ -46,6 +48,13 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerDokument, options)
 );
+
+app.use("/auth", authRouter);
+
+
+
+
+
 
 app.use((req, res) => {
   res.status(404).json({ message: `Not found - ${req.path}` });
@@ -58,9 +67,10 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message || "Something went wrong" });
   }
 });
-// const conectToBase = async () => {
-//   await connection;
-// }
+const conectToBase = async () => {
+  await connection;
+}
+conectToBase();
 // const startServer = async () => {
   try {
     // await connection;
@@ -72,7 +82,7 @@ app.use((err, req, res, next) => {
     process.exit(1);
   }
 // };
-// conectToBase();
+
 // startServer();
 // const app = require("express")();
 // require("dotenv").config();
