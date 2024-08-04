@@ -45,12 +45,12 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerDokument, options)
 );
-app.get("/auth", (req, res) => {
+app.get("/test", (req, res) => {
   res.send("Back-end auth");
 });
 
 
-// app.use("/auth", authRouter);
+app.use("/auth", authRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: `Not found - ${req.path}` });
