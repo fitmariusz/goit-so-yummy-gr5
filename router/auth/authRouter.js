@@ -10,7 +10,6 @@ const {
 const { validateBody } = require("../../validation/validationContacts");
 const {
   jwtAuth,
-  authRefreshToken,
 } = require("../../middlewares/jwtMiddleware");
 const {
   registerSchema,
@@ -24,7 +23,7 @@ router.post("/register", validateBody(registerSchema), register);
 router.post("/login", validateBody(loginSchema), login);
 router.get("/logout", jwtAuth, logout);
 router.get("/current", jwtAuth, getCurrentUser);
-router.get("/refresh", authRefreshToken, refresh);
+router.get("/refresh", refresh);
 // router.patch("/", jwtAuth, validateSubscription, updateSubscription);
 
 module.exports = router;

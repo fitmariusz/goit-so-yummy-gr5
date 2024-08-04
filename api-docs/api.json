@@ -115,18 +115,6 @@
                               "type": "string",
                               "description": "User email",
                               "format": "email"
-                            },
-                            "subscription": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "User email subscription",
-                              "format": "email",
-                              "example": null
-                            },
-                            "avatarURL": {
-                              "type": "string",
-                              "description": "User avatar",
-                              "example": "https://www.gravatar.com/avatar/d4d3e52f3e46c8fc33cca410a15f2fdc"
                             }
                           }
                         }
