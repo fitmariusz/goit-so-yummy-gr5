@@ -24,6 +24,7 @@ const authRefreshToken = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, (err, user) => {
     console.log(user);
     if (
+      !user ||
       err ||
       !user.refreshToken ||
       user.refreshToken !== req.headers.authorization.split(" ")[1]

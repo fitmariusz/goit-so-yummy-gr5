@@ -11,8 +11,7 @@ const register = async (req, res, next) => {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({
-        message:
-          "This user is in the database. Change the e-mail address and try again.",
+        message: "Email is already in use",
       });
     }
 
@@ -22,10 +21,15 @@ const register = async (req, res, next) => {
     newUser.setPassword(password);
     await newUser.save();
 
-    res.status(201).json({
-      user: {
-        name: newUser.name,
-        email: newUser.email,
+    res.json({
+      status: "success",
+      code: 201,
+      data: {
+        user: {
+          id: newUser.id,
+          name: newUser.name,
+          email: newUser.email,
+        },
       },
     });
   } catch (error) {
@@ -47,7 +51,7 @@ const login = async (req, res, next) => {
       email: user.email,
     };
 
-    const token = jwt.sign(payload, secret, { expiresIn: "30m" });
+    const token = jwt.sign(payload, secret, { expiresIn: "30h" });
     const refreshToken = jwt.sign(payload, secret, { expiresIn: "30d" });
 
     user.token = token;
@@ -55,10 +59,11 @@ const login = async (req, res, next) => {
     await user.save();
 
     res.json({
-      token,
-      refreshToken,
-      user: {
-        email: user.email,
+      status: "success",
+      code: 200,
+      data: {
+        token: user.token,
+        refreshToken: user.refreshToken,
       },
     });
   } catch (error) {
@@ -79,11 +84,10 @@ const logout = async (req, res, next) => {
     user.token = null;
     await user.save();
 
-    res.status(204).json({
-      user: {
-        email: user.email,
-        subscription: user.subscription,
-      },
+    res.json({
+      status: "Logout success",
+      code: 204,
+      message: "Logout success",
     });
   } catch (error) {
     next(error);
@@ -96,10 +100,14 @@ const getCurrentUser = async (req, res, next) => {
     if (!user) {
       return res.status(401).json({ message: "Not suthorized" });
     }
-    res.status(200).json({
-      id: user.id,
-      name: user.name,
-      email: user.email,
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        id: user.id,
+        name: user.name,
+        emil: user.email,
+      },
     });
   } catch (error) {
     next(error);
@@ -107,32 +115,44 @@ const getCurrentUser = async (req, res, next) => {
 };
 
 const refresh = async (req, res, next) => {
-  try {
-    const { user } = req.user;
-    res.send('test')
-    console.log(user
-    );
-    // const payload = {
-    //   id: user._id,
-    //   email: user.email,
-    // };
+  if (!req.body.refreshToken) {
+    return res.json({
+      status: "Invalid request - bad body",
+      code: 400,
+    });
+  } else {
+    try {
+      const user = await User.findOne(req.body);
+      if (!user) {
+        res.json({
+          status: "Invalid refresh token",
+          code: 401,
+        });
+      } else {
+        const payload = {
+          id: user._id,
+          email: user.email,
+        };
 
-    // const token = jwt.sign(payload, secret, { expiresIn: "30m" });
-    // const refreshToken = jwt.sign(payload, secret, { expiresIn: "30d" });
+        const token = jwt.sign(payload, secret, { expiresIn: "30m" });
+        const refreshToken = jwt.sign(payload, secret, { expiresIn: "30d" });
 
-    // user.token = token;
-    // user.refreshToken = refreshToken;
-    // await user.save();
+        user.token = token;
+        user.refreshToken = refreshToken;
+        await user.save();
 
-    // res.json({
-    //   token,
-    //   refreshToken,
-    //   user: {
-    //     email: user.email,
-    //   },
-    // });
-  } catch (error) {
-    next(error);
+        res.json({
+          startus: "Success",
+          code: 200,
+          data: {
+            token: user.token,
+            refreshToken: user.refreshToken,
+          },
+        });
+      }
+    } catch (error) {
+      next(error);
+    }
   }
 };
 
