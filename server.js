@@ -10,7 +10,7 @@ const swaggerDokument = require("./api-docs/api.json");
 // const apiRouter = require("./routes/api/contactsRouter");
 // const routeAvatar = require("./routes/avatars/routeAvatar");
 // const usersRouter = require("./routes/api/usersRouter");
-const authRouter = require("./router/auth/authRouter")
+const authRouter = require("./router/auth/authRouter");
 const options = {
   explorer: true,
 };
@@ -30,9 +30,6 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
-
-
-
 // app.use(express.static(path.join(__dirname, "public")));
 
 // app.use("/api", apiRouter);
@@ -40,7 +37,7 @@ app.use(express.json());
 // app.use("/avatars", routeAvatar);
 //
 app.get("/", (req, res) => {
-  res.send(connection);
+  res.send("Back-end So-yummy gr5");
 });
 
 app.use(
@@ -48,13 +45,12 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerDokument, options)
 );
-
-app.use("/auth", authRouter);
-
-
-
+app.get("/auth", (req, res) => {
+  res.send("Back-end auth");
+});
 
 
+// app.use("/auth", authRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: `Not found - ${req.path}` });
@@ -69,18 +65,18 @@ app.use((err, req, res, next) => {
 });
 const conectToBase = async () => {
   await connection;
-}
+};
 conectToBase();
 // const startServer = async () => {
-  try {
-    // await connection;
-    console.log("Database connected");
-    app.listen(process.env.PORT, () => {
-      console.log("Server started on http://localhost:8000");
-    });
-  } catch (err) {
-    process.exit(1);
-  }
+try {
+  // await connection;
+  console.log("Database connected");
+  app.listen(process.env.PORT, () => {
+    console.log("Server started on http://localhost:8000");
+  });
+} catch (err) {
+  process.exit(1);
+}
 // };
 
 // startServer();
