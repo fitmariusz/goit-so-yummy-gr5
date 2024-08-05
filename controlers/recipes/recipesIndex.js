@@ -23,4 +23,14 @@ const findRecipesByText = async (req, res, next) => {
     }
 };
 
-module.exports = { findRecipeById, findRecipesByText };
+const findRecipesByCategory = async (req, res, next) => { 
+    try {
+      const recipe = await Recipe.find({category: req.params.category}).limit(DEFAULT_LIMIT_PER_PAGE);
+          res.json(recipe);
+        // res.json(req.params.category);
+    } catch (error) {
+      next(error);
+    }
+};
+
+module.exports = { findRecipeById, findRecipesByText, findRecipesByCategory };
