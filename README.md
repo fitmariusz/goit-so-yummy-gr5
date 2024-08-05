@@ -1,4 +1,4 @@
-/auth/register
+<p>/auth/register
 /auth/login
 /auth/current
 /auth/logout
@@ -6,4 +6,4 @@
 
 /recipes/category-list
 /recipes/search?q=""
-/recipes/:id
+/recipes/:id</p>
