@@ -1,0 +1,10 @@
+const MAX_LIMIT_PER_PAGE = 50;
+const DEFAULT_LIMIT_PER_PAGE = 8;
+const DEFAULT_PAGE = 1;
+
+
+module.exports = {
+  MAX_LIMIT_PER_PAGE,
+  DEFAULT_LIMIT_PER_PAGE,
+  DEFAULT_PAGE,
+};
