@@ -4,6 +4,6 @@
 <p>/auth/logout</p>
 <p>/auth/refresh</p>
 
-/recipes/category-list
-/recipes/search?q=""
-/recipes/:id
+<p>/recipes/category-list</p>
+<p>/recipes/search?q=""</p>
+<p>/recipes/:id</p>
