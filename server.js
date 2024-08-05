@@ -56,7 +56,7 @@ app.get("/test", (req, res) => {
 
 
 app.use("/auth", authRouter);
-app.use("/reciple", recipeseRouter);
+app.use("/recipes", recipeseRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: `Not found - ${req.path}` });
