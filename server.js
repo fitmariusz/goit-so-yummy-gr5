@@ -11,6 +11,8 @@ const swaggerDokument = require("./api-docs/api.json");
 // const routeAvatar = require("./routes/avatars/routeAvatar");
 // const usersRouter = require("./routes/api/usersRouter");
 const authRouter = require("./router/auth/authRouter");
+const recipeseRouter = require("./router/recipes/recipesRouth");
+
 const options = {
   explorer: true,
 };
@@ -40,17 +42,21 @@ app.get("/", (req, res) => {
   res.send("Back-end So-yummy gr5");
 });
 
+
+
 app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(swaggerDokument, options)
 );
+
 app.get("/test", (req, res) => {
   res.send("Back-end auth");
 });
 
 
 app.use("/auth", authRouter);
+app.use("/reciple", recipeseRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: `Not found - ${req.path}` });
