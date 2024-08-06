@@ -6,4 +6,5 @@
 
 <p>/recipes/category-list</p>
 <p>/recipes/search?q=""</p>
-<p>/recipes/:id</p>
+<p>/recipes/id/:id</p>
+<p>/recipes/category/:category</p>
