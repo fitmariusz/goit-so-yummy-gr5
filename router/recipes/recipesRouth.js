@@ -8,8 +8,8 @@ const recipeFunction = require("../../controlers/recipes/recipesIndex");
 
 router.get("/category-list", getCategiriesList);
 router.get("/search", recipeFunction.findRecipesByText);
-router.get("/:category", recipeFunction.findRecipesByCategory);
-router.get("/:id", recipeFunction.findRecipeById);
+router.get("/category/:category", recipeFunction.findRecipesByCategory);
+router.get("/id/:id", recipeFunction.findRecipeById);
 router.post("/ownRecipes", recipeFunction.insertRecipe);
 router.delete("/ownRecipes", recipeFunction.remoweRecipe);
 
