@@ -8,7 +8,13 @@ const getCategiriesList = async (req, res, next) => {
     const categoriesList = (await Categorie.find()).map(
       (category) => category.title
     );
-    res.json(categoriesList);
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        categoy: categoriesList,
+      },
+    });
   } catch (error) {
     next(error);
   }

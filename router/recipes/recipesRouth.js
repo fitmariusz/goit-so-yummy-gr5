@@ -10,5 +10,7 @@ router.get("/category-list", getCategiriesList);
 router.get("/search", recipeFunction.findRecipesByText);
 router.get("/:category", recipeFunction.findRecipesByCategory);
 router.get("/:id", recipeFunction.findRecipeById);
+router.post("/ownRecipes", recipeFunction.insertRecipe);
+router.delete("/ownRecipes", recipeFunction.remoweRecipe);
 
 module.exports = router;

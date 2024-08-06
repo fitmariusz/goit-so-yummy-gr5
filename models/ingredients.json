@@ -1,0 +1,27 @@
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const categorieListSchema = new Schema({
+  ttl: {
+    type: String,
+    required: [true, "Title is required"],
+  },
+  desc: {
+    type: String,
+    required: [true, "Thambs is required"],
+  },
+  t: {
+    type: String,
+    required: [true, "Thambs is required"],
+  },
+  thb: {
+    type: String,
+    required: [true, "Description is required"],
+    unique: true,
+  },
+});
+
+const Categorie = mongoose.model("categorie", categorieListSchema);
+
+module.exports = Categorie;
