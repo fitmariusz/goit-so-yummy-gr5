@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
-// const { jwtAuth } = require("../../middlewares/jwtMiddleware");
 const {
   getCategiriesList,
 } = require("../../controlers/categoriesList/categoiresListIndex");
 const recipeFunction = require("../../controlers/recipes/recipesIndex");
+const { jwtAuth } = require("../../middlewares/jwtMiddleware");
 
-router.get("/category-list", getCategiriesList);
-router.get("/search", recipeFunction.findRecipesByText);
-router.get("/category/:category", recipeFunction.findRecipesByCategory);
-router.get("/id/:id", recipeFunction.findRecipeById);
-router.post("/ownRecipes", recipeFunction.insertRecipe);
-router.delete("/ownRecipes", recipeFunction.remoweRecipe);
+router.get("/category-list", jwtAuth, getCategiriesList);
+router.get("/search", jwtAuth, recipeFunction.findRecipesByText);
+router.get("/category/:category", jwtAuth, recipeFunction.findRecipesByCategory);
+router.get("/id/:id", jwtAuth, recipeFunction.findRecipeById);
+router.post("/ownRecipes", jwtAuth, recipeFunction.insertRecipe);
+router.delete("/ownRecipes/:recipeId", jwtAuth, recipeFunction.remoweRecipe);
+router.get("/ownRecipes", jwtAuth);
 
 module.exports = router;
