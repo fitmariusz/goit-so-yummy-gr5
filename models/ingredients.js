@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const categorieListSchema = new Schema({
+const ingredientsSchema = new Schema({
   ttl: {
     type: String,
     required: [true, "Title is required"],
@@ -22,6 +22,6 @@ const categorieListSchema = new Schema({
   },
 });
 
-const Categorie = mongoose.model("categorie", categorieListSchema);
+const Ingredient= mongoose.model("ingredient", ingredientsSchema);
 
-module.exports = Categorie;
+module.exports = Ingredient;
