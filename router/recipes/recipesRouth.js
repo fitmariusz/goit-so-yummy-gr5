@@ -12,6 +12,6 @@ router.get("/category/:category", jwtAuth, recipeFunction.findRecipesByCategory)
 router.get("/id/:id", jwtAuth, recipeFunction.findRecipeById);
 router.post("/ownRecipes", jwtAuth, recipeFunction.insertRecipe);
 router.delete("/ownRecipes/:recipeId", jwtAuth, recipeFunction.remoweRecipe);
-router.get("/ownRecipes", jwtAuth);
+router.get("/ownRecipes", jwtAuth, recipeFunction.myRecipes);
 
 module.exports = router;
