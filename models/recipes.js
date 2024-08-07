@@ -26,7 +26,6 @@ const recipe = new Schema(
     thumb: {
       type: String,
       required: [true, "Set image"],
-      
     },
     cloudinaryImageName: {
       type: String,
@@ -38,17 +37,9 @@ const recipe = new Schema(
     },
     time: {
       type: String,
-      required: [true, "Set time"],
-    },
-    popularity: {
-      type: Number,
-      default: null,
+      // required: [true, "Set time"],
     },
     favorites: {
-      type: Array,
-      default: null,
-    },
-    likes: {
       type: Array,
       default: null,
     },
@@ -68,14 +59,22 @@ const recipe = new Schema(
         },
         measure: {
           type: String,
-          required: [true, "Measure is required"],
+          // required: [true, "Measure is required"],
         },
         _id: false,
       },
     ],
     owner: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
+      id: {
+        type: mongoose.Types.ObjectId,
+        ref: "user",
+      },
+      name: {
+        type: String,
+      },
+      email: {
+        type: String,
+      },
     },
   },
   { versionKey: false, timestamps: true }

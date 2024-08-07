@@ -1,5 +1,6 @@
 require("dotenv").config();
 const Recipe = require("../../models/recipes");
+const User = require("../../models/user");
 const { DEFAULT_LIMIT_PER_PAGE } = require("../../variables/variables");
 
 const findRecipeById = async (req, res, next) => {
@@ -36,37 +37,49 @@ const findRecipesByCategory = async (req, res, next) => {
     next(error);
   }
 };
+
 const insertRecipe = async (req, res, next) => {
   try {
     const {
+      title,
       category,
       area,
       instructions,
-      thumb,
-      preview,
-      time,
-      favorites = null,
-      youtube = null,
-      tags = null,
-      createdAt=null,
-      updatedAt=null,
-      ingredients,
-    } = req.body;
-
-    const recipe = Recipe.create({
-      category,
-      area,
-      instructions,
+      descriptions,
       thumb,
       preview,
       time,
       favorites,
       youtube,
       tags,
-      createdAt,
-      updatedAt,
+      // createdAt,
+      // updatedAt,
       ingredients,
+    } = req.body;
+    const user = await User.findById(req.user._id);
+    const {id, email, name } = user;
+    // const objId = req.user._id;
+    // console.log(user._id);
+    const recipe = await Recipe.create({
+      title,
+      category,
+      area,
+      instructions,
+      descriptions,
+      thumb,
+      preview,
+      time,
+      favorites,
+      youtube,
+      tags,
+      ingredients,
+      owner: {
+        id,
+        email,
+        name,
+      },
     });
+ 
 
     if (recipe) {
       res.status(201).json({
@@ -86,7 +99,8 @@ const insertRecipe = async (req, res, next) => {
 
 const remoweRecipe = async (req, res, next) => {
   try {
-    const result = Recipe.findByIdAndDelete(req.params.recipeId);
+    console.log(req.params.recipeId);
+    const result = await Recipe.findByIdAndDelete(req.params.recipeId);
     console.log(result);
     res.json({
       status: "success",
@@ -98,7 +112,7 @@ const remoweRecipe = async (req, res, next) => {
   }
 };
 
-const myRecipe = async (req, res, next) => {
+const myRecipes = async (req, res, next) => {
   res.json(req.body);
 };
 
@@ -108,4 +122,5 @@ module.exports = {
   findRecipesByCategory,
   insertRecipe,
   remoweRecipe,
+  myRecipes,
 };
