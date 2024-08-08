@@ -37,7 +37,7 @@ const recipe = new Schema(
     },
     time: {
       type: String,
-      // required: [true, "Set time"],
+      // required: [true, " Set time"],
     },
     favorites: {
       type: Array,

@@ -1,4 +1,4 @@
-const nodemailer = require( "nodemailer");
+const nodemailer = require("nodemailer");
 
 const { M_USER, M_PASS } = process.env;
 
@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 const sendMail = async (html, subject, to) => {
   const info = await transporter.sendMail({
-    from: '<no-replay@so-yummo.com>', // sender address
+    from: "<no-replay@so-yummo.com>", // sender address
     to,
     subject,
     html,
