@@ -13,6 +13,7 @@ const swaggerDokument = require("./api-docs/api.json");
 const authRouter = require("./router/auth/authRouter");
 const recipeseRouter = require("./router/recipes/recipesRouth");
 const ingredientsRouter = require("./router/ingredients/ingredientsRouter");
+const subscribeRouter = require("./router/subscribe/subscribeRouter")
 
 const options = {
   explorer: true,
@@ -59,6 +60,7 @@ app.get("/test", (req, res) => {
 app.use("/auth", authRouter);
 app.use("/recipes", recipeseRouter);
 app.use("/ingredients", ingredientsRouter);
+app.use("/subscribe", subscribeRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: `Not found - ${req.path}` });
