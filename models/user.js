@@ -25,6 +25,11 @@ const userSchema = new Schema({
     type: String,
     default: null,
   },
+  // favorites:
+  // {
+  //   type: Array,
+  //   default : null
+  // },
 });
 
 userSchema.methods.setPassword = function (password) {
