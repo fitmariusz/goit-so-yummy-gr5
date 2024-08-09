@@ -25,11 +25,19 @@ const userSchema = new Schema({
     type: String,
     default: null,
   },
-  // favorites:
-  // {
-  //   type: Array,
-  //   default : null
-  // },
+  shopingList: [
+    {
+      id: {
+        type: mongoose.Types.ObjectId,
+        ref: "ingredient",
+      },
+      measure: {
+        type: String,
+        // required: [true, "Measure is required"],
+      },
+      _id: false,
+    },
+  ],
 });
 
 userSchema.methods.setPassword = function (password) {
