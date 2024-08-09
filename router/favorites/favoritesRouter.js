@@ -1,4 +1,8 @@
-const { addToFavorites, getFavoritesList, deleteFavoriteList } = require("../../controlers/favorites/favoritesIndex");
+const {
+  addToFavorites,
+  getFavoritesList,
+  deleteFavoriteList,
+} = require("../../controlers/favorites/favoritesIndex");
 const { jwtAuth } = require("../../middlewares/jwtMiddleware");
 const express = require("express");
 const router = express.Router();
