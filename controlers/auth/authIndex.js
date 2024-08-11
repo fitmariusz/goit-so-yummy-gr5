@@ -62,7 +62,7 @@ const login = async (req, res, next) => {
       status: "success",
       code: 200,
       data: {
-        name:user.name,
+        name: user.name,
         token: user.token,
         refreshToken: user.refreshToken,
       },
@@ -157,11 +157,36 @@ const refresh = async (req, res, next) => {
   }
 };
 
+const updataUser = async (req, res, next) => {
+  try {
+    const user = await User.updateOne({ _id: req.user.id }, { $set: req.body });
+    if (user.nModified === 0) {
+      console.log("Nie znaleziono użytkownika do aktualizacji lub brak zmian.");
+      res.status(404).json({
+        status: "error",
+        code: 404,
+        message: "Not change elements in user",
+      });
+    } else {
+      const newUser = await User.findById(req.user._id);
+      res.status(200).json({
+        status: "Succes",
+        code: 200,
+        user: newUser,
+        message: "User actualisation succes.",
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   register,
   login,
   logout,
   getCurrentUser,
   refresh,
+  updataUser,
   // updateSubscription,
 };

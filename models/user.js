@@ -16,7 +16,7 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Email is required"],
     unique: true,
-  },
+  }, 
   token: {
     type: String,
     default: null,
