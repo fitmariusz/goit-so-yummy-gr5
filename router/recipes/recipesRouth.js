@@ -15,3 +15,4 @@ router.delete("/ownRecipes/:recipeId", jwtAuth, recipeFunction.remoweRecipe);
 router.get("/ownRecipes", jwtAuth, recipeFunction.myRecipes);
 
 module.exports = router;
+ 

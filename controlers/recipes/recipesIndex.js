@@ -57,7 +57,7 @@ const insertRecipe = async (req, res, next) => {
       ingredients,
     } = req.body;
     const user = await User.findById(req.user._id);
-    const {id, email, name } = user;
+    const { id, email, name } = user;
     // const objId = req.user._id;
     // console.log(user._id);
     const recipe = await Recipe.create({
@@ -79,7 +79,6 @@ const insertRecipe = async (req, res, next) => {
         name,
       },
     });
- 
 
     if (recipe) {
       res.status(201).json({

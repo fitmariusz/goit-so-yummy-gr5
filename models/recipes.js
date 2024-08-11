@@ -5,11 +5,11 @@ const recipe = new Schema(
   {
     title: {
       type: String,
-      required: [true, "Set title"],
+      // required: [true, "Set title"],
     },
     category: {
       type: String,
-      required: [true, "Category is required"],
+      // required: [true, "Category is required"],
     },
     area: {
       type: String,
@@ -17,15 +17,15 @@ const recipe = new Schema(
     },
     instructions: {
       type: String,
-      reguired: [true, "Provide an instructions"],
+      // reguired: [true, "Provide an instructions"],
     },
     description: {
       type: String,
-      require: [true, "Description is required"],
+      // require: [true, "Description is required"],
     },
     thumb: {
       type: String,
-      required: [true, "Set image"],
+      // required: [true, "Set image"],
     },
     cloudinaryImageName: {
       type: String,
