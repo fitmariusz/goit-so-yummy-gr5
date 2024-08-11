@@ -16,7 +16,7 @@ const ingredientsRouter = require("./router/ingredients/ingredientsRouter");
 const subscribeRouter = require("./router/subscribe/subscribeRouter");
 const popularRouter = require("./router/popular/popularRouter");
 const favoritesRouter = require("./router/favorites/favoritesRouter");
-
+const shoppingListRouter = require("./router/shopingList/shoppingListRouter");
 const options = {
   explorer: true,
 };
@@ -62,6 +62,7 @@ app.use("/ingredients", ingredientsRouter);
 app.use("/subscribe", subscribeRouter);
 app.use("/popular", popularRouter);
 app.use("/favorites", favoritesRouter);
+app.use("/shopping-list", shoppingListRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: `Not found - ${req.path}` });
