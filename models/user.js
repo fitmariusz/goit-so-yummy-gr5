@@ -25,7 +25,7 @@ const userSchema = new Schema({
     type: String,
     default: null,
   },
-  shopingList: [
+  shoppingList: [
     {
       id: {
         type: mongoose.Types.ObjectId,
