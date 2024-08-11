@@ -1,6 +1,28 @@
 require("dotenv").config();
 const User = require("../../models/user");
 
+const getShoppingList = async (req, res, next) => {
+  console.log(req.user._id);
+  try {
+    const user = await User.findById(req.user._id);
+    if (user) {
+      res.status(200).json({
+        status: "succrss",
+        code: 200,
+        shoppingList: user.shoppingList,
+      });
+    } else {
+      res.status(404).json({
+        status: "error",
+        code: 404,
+        message: "Not fins user",
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 const addIngredientsToList = async (req, res, next) => {
   try {
     const user = await User.updateOne(
@@ -61,4 +83,8 @@ const deleteIngredientsFromList = async (req, res, next) => {
   }
 };
 
-module.exports = { addIngredientsToList, deleteIngredientsFromList };
+module.exports = {
+  addIngredientsToList,
+  deleteIngredientsFromList,
+  getShoppingList,
+};
