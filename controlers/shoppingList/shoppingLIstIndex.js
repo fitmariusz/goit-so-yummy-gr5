@@ -23,7 +23,7 @@ const addIngredientsToList = async (req, res, next) => {
       res.json({
         status: "succrs",
         code: 200,
-        newUser,
+        user: newUser,
         messager: "Ingredients add to shoping list",
       });
     }
@@ -52,7 +52,7 @@ const deleteIngredientsFromList = async (req, res, next) => {
       res.json({
         status: "succrs",
         code: 200,
-        newUser,
+        user: newUser,
         messager: "Ingredients delete from shoping list",
       });
     }
