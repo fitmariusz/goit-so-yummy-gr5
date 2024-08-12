@@ -1,6 +1,9 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const User = require("../../models/user");
+const fs = require("fs").promises;
+const path = require("path");
+const jimp = require("jimp");
 
 const secret = process.env.SECRET;
 
@@ -181,6 +184,35 @@ const updataUser = async (req, res, next) => {
   }
 };
 
+const updateAvatar = async (req, res, next) => {
+  const avatarsDir = path.join(__dirname, "../../public/avatars");
+  try {
+    const { path: tmpPath, originalname } = req.file;
+    const { _id: userId } = req.user;
+
+    const img = await jimp.read(tmpPath);
+    await img.resize(250, 250).writeAsync(tmpPath);
+
+    const uniqueName = `${userId}-${Date.now()}-${originalname}`;
+    const avatarURL = path.join("avatars", uniqueName);
+    const publicPath = path.join(avatarsDir, uniqueName);
+    await fs.rename(tmpPath, publicPath);
+    await User.findByIdAndUpdate(userId, { avatarURL }, { new: true });
+
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        avatarURL: `http://localhost:${
+          process.env.PORT || 8000
+        }/api/${avatarURL}`,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -188,5 +220,5 @@ module.exports = {
   getCurrentUser,
   refresh,
   updataUser,
-  // updateSubscription,
+  updateAvatar,
 };
