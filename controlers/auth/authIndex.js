@@ -4,6 +4,8 @@ const User = require("../../models/user");
 const fs = require("fs").promises;
 const path = require("path");
 const jimp = require("jimp");
+const gravatar = require("gravatar");
+const { use } = require("passport");
 
 const secret = process.env.SECRET;
 
@@ -20,8 +22,8 @@ const register = async (req, res, next) => {
 
     const newUser = new User({ email });
     newUser.name = name;
-    console.log(newUser);
     newUser.setPassword(password);
+    newUser.avatarURL = gravatar.url(email, { protocol: "https", s: "100" });
     await newUser.save();
 
     res.json({
@@ -59,6 +61,7 @@ const login = async (req, res, next) => {
 
     user.token = token;
     user.refreshToken = refreshToken;
+    
     await user.save();
 
     res.json({
@@ -111,6 +114,9 @@ const getCurrentUser = async (req, res, next) => {
         id: user.id,
         name: user.name,
         emil: user.email,
+        avatarURL: user.avatarURL,
+        favorites: user.favorites,
+        shoppingList: user.shoppingList,
       },
     });
   } catch (error) {
@@ -186,6 +192,7 @@ const updataUser = async (req, res, next) => {
 
 const updateAvatar = async (req, res, next) => {
   const avatarsDir = path.join(__dirname, "../../public/avatars");
+
   try {
     const { path: tmpPath, originalname } = req.file;
     const { _id: userId } = req.user;
@@ -205,7 +212,7 @@ const updateAvatar = async (req, res, next) => {
       data: {
         avatarURL: `http://localhost:${
           process.env.PORT || 8000
-        }/api/${avatarURL}`,
+        }/${avatarURL}`,
       },
     });
   } catch (error) {
