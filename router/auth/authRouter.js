@@ -9,9 +9,7 @@ const {
   updataUser,
 } = require("../../controlers/auth/authIndex");
 const { validateBody } = require("../../validation/validationContacts");
-const {
-  jwtAuth,
-} = require("../../middlewares/jwtMiddleware");
+const { jwtAuth } = require("../../middlewares/jwtMiddleware");
 const {
   registerSchema,
   loginSchema,
@@ -26,6 +24,5 @@ router.patch("/updata", jwtAuth, updataUser);
 router.get("/logout", jwtAuth, logout);
 router.get("/current", jwtAuth, getCurrentUser);
 router.get("/refresh", refresh);
-// router.patch("/", jwtAuth, validateSubscription, updateSubscription);
 
 module.exports = router;
