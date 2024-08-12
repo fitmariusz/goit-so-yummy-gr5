@@ -25,6 +25,19 @@ const userSchema = new Schema({
     type: String,
     default: null,
   },
+  avatarURL: {
+    type: String,
+    default: null,
+  },
+   favorites: [
+    {
+      id: {
+        type: mongoose.Types.ObjectId,
+        ref: "recipes",
+      },
+      _id: false,
+     },
+    ],
   shoppingList: [
     {
       id: {

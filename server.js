@@ -17,6 +17,8 @@ const subscribeRouter = require("./router/subscribe/subscribeRouter");
 const popularRouter = require("./router/popular/popularRouter");
 const favoritesRouter = require("./router/favorites/favoritesRouter");
 const shoppingListRouter = require("./router/shopingList/shoppingListRouter");
+const avatarRuter = require("./router/avatars/avatarsRoute");
+
 const options = {
   explorer: true,
 };
@@ -57,6 +59,7 @@ app.get("/test", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/avatars",avatarRuter);
 app.use("/recipes", recipeseRouter);
 app.use("/ingredients", ingredientsRouter);
 app.use("/subscribe", subscribeRouter);
