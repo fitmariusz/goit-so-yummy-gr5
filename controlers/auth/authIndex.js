@@ -5,7 +5,7 @@ const fs = require("fs").promises;
 const path = require("path");
 const jimp = require("jimp");
 const gravatar = require("gravatar");
-const { use } = require("passport");
+
 
 const secret = process.env.SECRET;
 
