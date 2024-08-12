@@ -6,7 +6,6 @@ const path = require("path");
 const jimp = require("jimp");
 const gravatar = require("gravatar");
 
-
 const secret = process.env.SECRET;
 
 const register = async (req, res, next) => {
@@ -61,7 +60,7 @@ const login = async (req, res, next) => {
 
     user.token = token;
     user.refreshToken = refreshToken;
-    
+
     await user.save();
 
     res.json({
@@ -210,9 +209,7 @@ const updateAvatar = async (req, res, next) => {
       status: "success",
       code: 200,
       data: {
-        avatarURL: `http://localhost:${
-          process.env.PORT || 8000
-        }/${avatarURL}`,
+        avatarURL: `http://localhost:${process.env.PORT || 8000}/${avatarURL}`,
       },
     });
   } catch (error) {
